@@ -1,23 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>nonchalantify</h1>
     
-    <label class="switch">
-      <input type="checkbox" id="toggle" checked>
-      <span class="slider"></span>
-    </label>
+    <div class="header-with-icon">
+      <img src="icon.png" alt="nonchalantify" class="icon">
+      <div class="header-text">
+        <h1>nonchalantify</h1>
+        <p class="tagline">making the internet less shouty</p>
+      </div>
+    </div>
+    
+    <div class="toggle-section">
+      <span class="toggle-label">enabled</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    
+    <div class="level-section">
+      <p class="section-title">nonchalance level</p>
+      
+      <label class="radio-option">
+        <input type="radio" name="level" value="1" id="level-1" checked>
+        <span class="radio-label">
+          <span class="level-name">casual</span>
+          <span class="level-desc">just css. reversible</span>
+        </span>
+      </label>
+      
+      <label class="radio-option">
+        <input type="radio" name="level" value="2" id="level-2">
+        <span class="radio-label">
+          <span class="level-name">committed</span>
+          <span class="level-desc">removes uppercase classes. kills bold</span>
+        </span>
+      </label>
+      
+      <label class="radio-option">
+        <input type="radio" name="level" value="3" id="level-3">
+        <span class="radio-label">
+          <span class="level-name">unhinged</span>
+          <span class="level-desc">demotes headers.</span>
+        </span>
+      </label>
+      
+      <label class="radio-option">
+        <input type="radio" name="level" value="4" id="level-4">
+        <span class="radio-label">
+          <span class="level-name">enlightened</span>
+          <span class="level-desc">replaces chalant language and punctuation</span>
+        </span>
+      </label>
+    </div>
     
     <div class="stats">
-      <p>📊 your nonchalance stats</p>
-      <p>letters lowercased: <span id="count">0</span></p>
-      <p>vibes: immaculate</p>
+      <p class="section-title">📊 your nonchalance stats</p>
+      <div class="stat-item">
+        <span class="stat-label">letters lowercased:</span>
+        <span class="stat-value" id="lowercased-count">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">punctuation turned down:</span>
+        <span class="stat-value" id="punctuation-count">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">urgency reduced:</span>
+        <span class="stat-value">94%</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">vibes:</span>
+        <span class="stat-value">immaculate</span>
+      </div>
     </div>
-
+    
+    <p class="footer">build in public. vibes only.</p>
   </div>
   <script src="popup.js"></script>
 </body>

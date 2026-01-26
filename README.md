@@ -3,9 +3,18 @@
 making the internet less shouty since 2026
 
 ## features
+
 - lowercase everything
-- track your nonchalance metrics
+- track your nonchalance metrics  
+- four levels of commitment
 - pairs well with $18 matcha
+
+## nonchalance levels
+
+**casual** - just css. reversible  
+**committed** - removes uppercase classes. kills bold  
+**unhinged** - rewrites dom. demotes headers. chaos  
+**enlightened** - urgent → whenever. !!! → ...
 
 ## installation
 chrome web store link here

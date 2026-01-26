@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# system files
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# extension packaging
+*.zip
+*.crx
+*.pem
+
+# screenshots (add them manually)
+screenshots/
