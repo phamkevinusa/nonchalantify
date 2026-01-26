@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "nonchalantify",
+  "version": "1.0",
+  "description": "making the internet less shouty",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }]
+}
