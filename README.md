@@ -25,7 +25,9 @@ making the internet less shouty since 2026
    
 <img src="https://github.com/user-attachments/assets/92e68b74-7f9d-46c3-81a3-8c76a669edce" width="400" />
 
-<img width="777" height="701" alt="Image" src="https://github.com/user-attachments/assets/b2b8b576-bdf6-4d21-833b-b9a11f2c6464" />
+<img width="400" alt="Image" src="https://github.com/user-attachments/assets/b2b8b576-bdf6-4d21-833b-b9a11f2c6464" />
+
+<img width="2559" height="1400" alt="Image" src="https://github.com/user-attachments/assets/797f2bf5-5ffa-450c-b14b-2242f05e269a" />
 
 ## installation
 
