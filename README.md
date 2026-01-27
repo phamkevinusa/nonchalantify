@@ -1,8 +1,9 @@
 # <img src="https://github.com/phamkevinusa/nonchalantify/blob/master/src/icon.png" width="45" /> nonchalantify
 
 
-
 making the internet less shouty since 2026
+
+<img width="800" alt="Image" src="https://github.com/user-attachments/assets/bf9e741b-13d0-4bde-85e3-c14e7254b62c" />
 
 ## features
 
@@ -10,13 +11,21 @@ making the internet less shouty since 2026
 - track your nonchalance metrics  
 - four levels of commitment
 - pairs well with $18 matcha
+- makes jira tickets seem less urgent
+
 
 ## nonchalance levels
 
 **casual** - just css. reversible  
 **committed** - removes uppercase classes. kills bold  
-**unhinged** - rewrites dom. demotes headers. chaos  
-**enlightened** - urgent → whenever. !!! → ... rewrites chalant punctuation and language
+**unhinged** - rewrites dom. demotes headers to h6. chaos  
+**enlightened** - urgent → whenever. !!! → ... | rewrites chalant punctuation and language
+
+<img width = "200" alt="Image" src="https://github.com/user-attachments/assets/92d6cc9e-7e95-4f65-882a-eb1ba45f6bc9" />
+   
+<img src="https://github.com/user-attachments/assets/92e68b74-7f9d-46c3-81a3-8c76a669edce" width="400" />
+
+<img width="777" height="701" alt="Image" src="https://github.com/user-attachments/assets/b2b8b576-bdf6-4d21-833b-b9a11f2c6464" />
 
 ## installation
 
@@ -45,7 +54,7 @@ not yet. installing from source builds character.
 
 ### for developers
 ```bash
-git clone https://github.com/yourusername/nonchalantify.git
+git clone https://github.com/phamkevinusa/nonchalantify.git
 cd nonchalantify
 # then follow step 2 above
 ```
