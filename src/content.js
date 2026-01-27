@@ -31,7 +31,7 @@ function applyCasual() {
   style.id = 'nonchalantify-style';
   style.textContent = `
     * {
-      text-transform: lowercase;
+      text-transform: lowercase !important;
     }
     /* Allow explicit uppercase classes to work */
     .text-uppercase,
@@ -128,6 +128,10 @@ function applyUnhinged() {
   try {
     for (let sheet of document.styleSheets) {
       try {
+        // Skip our own nonchalantify styles
+        if (sheet.ownerNode && (sheet.ownerNode.id === 'nonchalantify-style' || sheet.ownerNode.id === 'nonchalantify-enlightened')) {
+          continue;
+        }
         for (let rule of sheet.cssRules) {
           if (rule.style) {
             const ruleStyle = rule.style;
@@ -156,72 +160,40 @@ function applyEnlightened() {
 
   // replace chalant language
   const replacements = {
-    'URGENT': 'whenever',
     'urgent': 'whenever',
-    'BREAKING NEWS': 'some stuff happened',
     'breaking news': 'some stuff happened',
-    'IMPORTANT': 'maybe relevant',
     'important': 'maybe relevant',
-    'CALL NOW': 'maybe later',
     'call now': 'maybe later',
-    'LIMITED TIME': 'no rush',
     'limited time': 'no rush',
-    'ACT NOW': 'or dont',
     'act now': 'or dont',
-    'HURRY': 'whenever',
     'hurry': 'whenever',
-    'EXCLUSIVE': 'whatever',
     'exclusive': 'whatever',
-    'DON\'T MISS': 'you might see',
     'don\'t miss': 'you might see',
-    'LAST CHANCE': 'another chance probably',
     'last chance': 'another chance probably',
-    'MUST SEE': 'could look at',
     'must see': 'could look at',
-    'MUST READ': 'could read',
     'must read': 'could read',
-    'MUST HAVE': 'could get',
     'must have': 'could get',
-    'ALERT': 'fyi',
     'alert': 'fyi',
-    'WARNING': 'heads up maybe',
     'warning': 'heads up maybe',
-    'CRITICAL': 'kinda matters',
     'critical': 'kinda matters',
-    'NOW': 'eventually',
-    'ASAP': 'when you feel like it',
-    'IMMEDIATELY': 'at some point',
+    'now': 'eventually',
+    'asap': 'when you feel like it',
     'immediately': 'at some point',
-    'FINAL': 'another',
     'final': 'another',
-    'DEADLINE': 'suggestion',
     'deadline': 'suggestion',
-    'ENDS SOON': 'goes on forever',
     'ends soon': 'goes on forever',
-    'TODAY ONLY': 'available',
     'today only': 'available',
-    'CLICK HERE': 'maybe click',
     'click here': 'maybe click',
-    'BUY NOW': 'buy whenever',
     'buy now': 'buy whenever',
-    'ORDER NOW': 'order if you want',
     'order now': 'order if you want',
-    'SUBSCRIBE NOW': 'subscribe maybe',
     'subscribe now': 'subscribe maybe',
-    'SIGN UP NOW': 'sign up sometime',
     'sign up now': 'sign up sometime',
-    'FREE': 'included',
-    'SAVE NOW': 'save later',
+    'free': 'included',
     'save now': 'save later',
-    'LIMITED OFFER': 'regular offer',
     'limited offer': 'regular offer',
-    'AMAZING': 'ok',
     'amazing': 'ok',
-    'INCREDIBLE': 'decent',
     'incredible': 'decent',
-    'UNBELIEVABLE': 'believable',
     'unbelievable': 'believable',
-    'GUARANTEED': 'probably',
     'guaranteed': 'probably'
   };
 
