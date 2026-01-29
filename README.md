@@ -3,7 +3,7 @@
 
 making the internet less shouty since 2026
 
-<img width="800" alt="Image" src="https://github.com/user-attachments/assets/bf9e741b-13d0-4bde-85e3-c14e7254b62c" />
+<img width="800" alt="Image" src="https://github.com/user-attachments/assets/e4365dc4-8477-4a33-80ac-867c3cc6a45b" />
 
 ## features
 
