@@ -48,27 +48,27 @@ function applyCasual() {
 function applyCommitted() {
   applyCasual();
 
-  // remove text-uppercase classes
-  const upperElements = document.querySelectorAll('[class*="uppercase"], [class*="UPPERCASE"]');
-  upperElements.forEach(el => {
-    // remove all variations of uppercase classes
-    const classes = el.className.split(' ').filter(cls =>
-      !cls.toLowerCase().includes('uppercase')
-    );
-    el.className = classes.join(' ');
-  });
+  // // remove text-uppercase classes
+  // const upperElements = document.querySelectorAll('[class*="uppercase"], [class*="UPPERCASE"]');
+  // upperElements.forEach(el => {
+  //   // remove all variations of uppercase classes
+  //   const classes = el.className.split(' ').filter(cls =>
+  //     !cls.toLowerCase().includes('uppercase')
+  //   );
+  //   el.className = classes.join(' ');
+  // });
 
-  // remove inline uppercase styles
-  const allElements = document.querySelectorAll('*');
-  allElements.forEach(el => {
-    if (el.style.textTransform === 'uppercase' || el.style.textTransform === 'UPPERCASE') {
-      el.style.textTransform = 'lowercase';
-    }
-    // remove bold - being bold is try-hard
-    if (el.style.fontWeight === 'bold' || parseInt(el.style.fontWeight) >= 700) {
-      el.style.fontWeight = 'normal';
-    }
-  });
+  // // remove inline uppercase styles
+  // const allElements = document.querySelectorAll('*');
+  // allElements.forEach(el => {
+  //   if (el.style.textTransform === 'uppercase' || el.style.textTransform === 'UPPERCASE') {
+  //     el.style.textTransform = 'lowercase';
+  //   }
+  //   // remove bold - being bold is try-hard
+  //   if (el.style.fontWeight === 'bold' || parseInt(el.style.fontWeight) >= 700) {
+  //     el.style.fontWeight = 'normal';
+  //   }
+  // });
 
   // tone down all headers
   const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
@@ -254,22 +254,29 @@ function nonchalantify(level) {
   }
 }
 
-// Apply level 1 (CSS) immediately
-const quickStyle = document.createElement('style');
-quickStyle.id = 'nonchalantify-quick';
-quickStyle.textContent = '* { text-transform: lowercase !important; }';
-
-// Try to inject ASAP
-function injectQuickStyle() {
-  if (document.head) {
-    document.head.appendChild(quickStyle);
-  } else if (document.documentElement) {
-    document.documentElement.appendChild(quickStyle);
+// Apply level 1 and 2 (CSS) immediately
+chrome.storage.local.get(['enabled', 'level'], (result) => {
+  if (result.enabled === false) return;
+  
+  const level = result.level || 1;
+  const style = document.createElement('style');
+  style.id = 'nonchalantify-instant';
+  
+  if (level === 1) {
+    // Just lowercase
+    style.textContent = `* { text-transform: lowercase !important; }`;
+  } else if (level >= 2) {
+    // Lowercase + remove bold
+    style.textContent = `
+      * { 
+        text-transform: lowercase !important;
+        font-weight: 400 !important;
+      }
+    `;
   }
-}
 
-// Inject immediately
-injectQuickStyle();
+  document.head.appendChild(style);
+});
 
 // Then wait for full DOM for other levels
 document.addEventListener('DOMContentLoaded', () => {
@@ -278,8 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
       collectStats();
       const level = result.level || 1;
       
-      // If level 1, CSS already applied
-      if (level > 1) {
+      // If level 1 or 2, CSS already applied
+      if (level > 2) {
         nonchalantify(level);
       }
     }
