@@ -48,34 +48,6 @@ function applyCasual() {
 function applyCommitted() {
   applyCasual();
 
-  // // remove text-uppercase classes
-  // const upperElements = document.querySelectorAll('[class*="uppercase"], [class*="UPPERCASE"]');
-  // upperElements.forEach(el => {
-  //   // remove all variations of uppercase classes
-  //   const classes = el.className.split(' ').filter(cls =>
-  //     !cls.toLowerCase().includes('uppercase')
-  //   );
-  //   el.className = classes.join(' ');
-  // });
-
-  // // remove inline uppercase styles
-  // const allElements = document.querySelectorAll('*');
-  // allElements.forEach(el => {
-  //   if (el.style.textTransform === 'uppercase' || el.style.textTransform === 'UPPERCASE') {
-  //     el.style.textTransform = 'lowercase';
-  //   }
-  //   // remove bold - being bold is try-hard
-  //   if (el.style.fontWeight === 'bold' || parseInt(el.style.fontWeight) >= 700) {
-  //     el.style.fontWeight = 'normal';
-  //   }
-  // });
-
-  // tone down all headers
-  const headers = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-  headers.forEach(h => {
-    h.style.fontWeight = 'normal';
-  });
-
   // make everything 400 weight
   const style = document.createElement('style');
   style.id = 'nonchalantify-enlightened';
@@ -89,27 +61,17 @@ function applyCommitted() {
 
 // Level 3: Unhinged - actually modify the DOM
 function applyUnhinged() {
-  applyCommitted();
+  applyCasual();
 
-
-  // /*
-  //   // this breaks a lot of websites
-
-  //   // walk through all text nodes and lowercase them
-  //   const walker = document.createTreeWalker(
-  //     document.body,
-  //     NodeFilter.SHOW_TEXT,
-  //     null,
-  //     false
-  //   );
-
-  //   let node;
-  //   while (node = walker.nextNode()) {
-  //     if (node.nodeValue && node.nodeValue.trim()) {
-  //       node.nodeValue = node.nodeValue.toLowerCase();
-  //     }
-  //   }
-  // */
+  // make everything 400 weight
+  const style = document.createElement('style');
+  style.id = 'nonchalantify-enlightened';
+  style.textContent = `
+    * {
+      font-weight: 400 !important;
+    }
+  `;
+  document.head.appendChild(style);
 
   // demote all headers to h6 (everything is equally unimportant)
   ['h1', 'h2', 'h3', 'h4', 'h5'].forEach(tag => {
@@ -123,37 +85,7 @@ function applyUnhinged() {
       h.parentNode.replaceChild(newH, h);
     });
   });
-
-  // Remove all !important from stylesheets (the irony)
-  try {
-    for (let sheet of document.styleSheets) {
-      try {
-        // Skip our own nonchalantify styles
-        if (sheet.ownerNode && (sheet.ownerNode.id === 'nonchalantify-style' || sheet.ownerNode.id === 'nonchalantify-enlightened')) {
-          continue;
-        }
-        for (let rule of sheet.cssRules) {
-          if (rule.style) {
-            const ruleStyle = rule.style;
-            for (let i = 0; i < ruleStyle.length; i++) {
-              const prop = ruleStyle[i];
-              const value = ruleStyle.getPropertyValue(prop);
-              const priority = ruleStyle.getPropertyPriority(prop);
-              if (priority === 'important') {
-                ruleStyle.setProperty(prop, value, '');
-              }
-            }
-          }
-        }
-      } catch (e) {
-        // cross-origin stylesheet, skip it
-      }
-    }
-  } catch (e) {
-    // just vibes, no errors
-  }
 }
-
 
 // Level 4: Enlightened - peak nonchalance
 function applyEnlightened() {
@@ -285,22 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
       collectStats();
       const level = result.level || 1;
       
-      // If level 1 or 2, CSS already applied
+      // If level 1, CSS already applied
       if (level > 2) {
         nonchalantify(level);
       }
     }
   });
-});
-
-
-// Initialize
-chrome.storage.local.get(['enabled', 'level'], (result) => {
-  if (result.enabled !== false) {
-    collectStats();
-    const level = result.level || 1;
-    nonchalantify(level);
-  }
 });
 
 // Listen for changes
