@@ -154,6 +154,7 @@ function applyUnhinged() {
   }
 }
 
+
 // Level 4: Enlightened - peak nonchalance
 function applyEnlightened() {
   applyUnhinged();
@@ -252,6 +253,39 @@ function nonchalantify(level) {
       break;
   }
 }
+
+// Apply level 1 (CSS) immediately
+const quickStyle = document.createElement('style');
+quickStyle.id = 'nonchalantify-quick';
+quickStyle.textContent = '* { text-transform: lowercase !important; }';
+
+// Try to inject ASAP
+function injectQuickStyle() {
+  if (document.head) {
+    document.head.appendChild(quickStyle);
+  } else if (document.documentElement) {
+    document.documentElement.appendChild(quickStyle);
+  }
+}
+
+// Inject immediately
+injectQuickStyle();
+
+// Then wait for full DOM for other levels
+document.addEventListener('DOMContentLoaded', () => {
+  chrome.storage.local.get(['enabled', 'level'], (result) => {
+    if (result.enabled !== false) {
+      collectStats();
+      const level = result.level || 1;
+      
+      // If level 1, CSS already applied
+      if (level > 1) {
+        nonchalantify(level);
+      }
+    }
+  });
+});
+
 
 // Initialize
 chrome.storage.local.get(['enabled', 'level'], (result) => {
