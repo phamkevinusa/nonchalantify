@@ -28,31 +28,18 @@ function collectStats() {
 // Level 1: Casual - just CSS
 function applyCasual() {
   const style = document.createElement('style');
-  style.id = 'nonchalantify-style';
-  style.textContent = `
-    * {
-      text-transform: lowercase !important;
-    }
-    /* Allow explicit uppercase classes to work */
-    .text-uppercase,
-    .uppercase,
-    [class*="uppercase"],
-    [class*="UPPERCASE"] {
-      text-transform: uppercase !important;
-    }
-  `;
+  style.id = 'nonchalantify-instant';
+  style.textContent = `* { text-transform: lowercase !important; }`;
   document.head.appendChild(style);
 }
 
-// Level 2: Committed - remove uppercase classes and bold
+// Level 2: Committed - remove bold
 function applyCommitted() {
-  applyCasual();
-
-  // make everything 400 weight
   const style = document.createElement('style');
-  style.id = 'nonchalantify-enlightened';
+  style.id = 'nonchalantify-instant';
   style.textContent = `
-    * {
+    * { 
+      text-transform: lowercase !important;
       font-weight: 400 !important;
     }
   `;
@@ -61,7 +48,7 @@ function applyCommitted() {
 
 // Level 3: Unhinged - actually modify the DOM
 function applyUnhinged() {
-  applyCasual();
+
 
   // make everything 400 weight
   const style = document.createElement('style');
@@ -159,24 +146,15 @@ function applyEnlightened() {
 
 }
 
-// Apply the appropriate level
+// Apply the appropriate level (for DOM manipulation levels only)
 function nonchalantify(level) {
   // Remove existing styles first
-  const existingStyle = document.getElementById('nonchalantify-style');
-  if (existingStyle) existingStyle.remove();
-
   const existingEnlightened = document.getElementById('nonchalantify-enlightened');
   if (existingEnlightened) existingEnlightened.remove();
 
   currentLevel = level;
 
   switch (level) {
-    case 1:
-      applyCasual();
-      break;
-    case 2:
-      applyCommitted();
-      break;
     case 3:
       applyUnhinged();
       break;
@@ -191,23 +169,12 @@ chrome.storage.local.get(['enabled', 'level'], (result) => {
   if (result.enabled === false) return;
   
   const level = result.level || 1;
-  const style = document.createElement('style');
-  style.id = 'nonchalantify-instant';
   
   if (level === 1) {
-    // Just lowercase
-    style.textContent = `* { text-transform: lowercase !important; }`;
+    applyCasual();
   } else if (level >= 2) {
-    // Lowercase + remove bold
-    style.textContent = `
-      * { 
-        text-transform: lowercase !important;
-        font-weight: 400 !important;
-      }
-    `;
+    applyCommitted();
   }
-
-  document.head.appendChild(style);
 });
 
 // Then wait for full DOM for other levels
